@@ -503,8 +503,9 @@ body,section,footer,#topnav{transition:background-color .35s,color .35s}
 </div>
 
 <section id="hero">
-  <!-- Hero background media: put hero1.mp4, hero2.mp4 and hero3.mp4 in the SAME folder as this index.html -->
-  <video class="hero-bg-video hb-layer on" id="hbV1" src="hero1.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+  <!-- Hero background media: put intro.jpg, hero1.mp4, hero2.mp4 and hero3.mp4 in the SAME folder as this index.html -->
+  <img class="hero-bg-video hb-layer on" id="hbImg" src="intro.jpg" alt="Rakoda marine project">
+  <video class="hero-bg-video hb-layer" id="hbV1" src="hero1.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
   <video class="hero-bg-video hb-layer" id="hbV2" src="hero2.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
   <video class="hero-bg-video hb-layer" id="hbV3" src="hero3.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero-bg-overlay"></div>
@@ -1018,26 +1019,26 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') $('lbPrev').click();
 });
 
-// ---- Hero background: three videos in a loop, all at the same playback speed ----
+// ---- Hero background: intro image, then videos 1, 2 and 3 in a loop ----
 (() => {
-  const vids = [$('hbV1'), $('hbV2'), $('hbV3')];
-  const show = el => vids.forEach(l => l.classList.toggle('on', l === el));
-  vids.forEach(v => { v.muted = true; v.defaultPlaybackRate = 1; v.playbackRate = 1; });
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { show(vids[0]); return; }
+  const img = $('hbImg'), vids = [$('hbV1'), $('hbV2'), $('hbV3')];
+  const layers = [img, ...vids];
+  const show = el => layers.forEach(l => l.classList.toggle('on', l === el));
+  vids.forEach(v => { v.muted = true; });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const play = i => {
     const v = vids[i];
     try { v.currentTime = 0; } catch (e) {}
-    v.playbackRate = 1;
     const p = v.play();
     if (p && p.catch) p.catch(() => {});
     show(v);
   };
   vids.forEach((v, i) => {
-    const next = () => play((i + 1) % vids.length);
+    const next = () => { if (i < vids.length - 1) play(i + 1); else { show(img); setTimeout(() => play(0), 3500); } };
     v.addEventListener('ended', next);
     v.addEventListener('error', () => { console.warn('Hero video failed to load:', v.getAttribute('src')); next(); });
   });
-  play(0);
+  setTimeout(() => play(0), 3500);
   const kick = () => { const a = vids.find(v => v.classList.contains('on')); if (a && a.paused && !a.ended) a.play().catch(() => {}); };
   document.addEventListener('touchstart', kick, {passive:true});
   document.addEventListener('click', kick);
