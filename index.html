@@ -124,16 +124,19 @@ section>*{position:relative;z-index:10}
 .mission-section .about-statement{max-width:800px;margin:0 auto;text-align:left}
 
 #services{background:var(--navy)}
-.svc-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;align-items:center}
+.svc-layout{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
 .svc-banner{border-radius:14px;overflow:hidden;border:1px solid var(--border2)}
 .svc-banner img{display:block;width:100%;height:auto}
-.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc-img{margin-top:14px;border-radius:10px;overflow:hidden;border:1px solid var(--border2);aspect-ratio:16/10;cursor:pointer}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.svc-img:hover img{transform:scale(1.06)}
 .holo-card{position:relative;border-radius:14px;background:linear-gradient(135deg,rgba(10,22,40,.9),rgba(6,15,30,.95));border:1px solid var(--border);backdrop-filter:blur(20px);padding:14px 14px;transition:transform .3s,box-shadow .3s}
 .holo-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,255,204,.08),0 0 0 1px rgba(0,255,204,.25)}
 .holo-card .ic{width:30px;height:30px;border-radius:8px;background:var(--teal3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;margin-bottom:8px}
 .holo-card h3{font-size:13.5px;font-weight:700;margin-bottom:4px;color:var(--text)}
 .holo-card p{font-size:11.5px;color:var(--text2);line-height:1.5;font-weight:300}
-@media(max-width:900px){.svc-layout{grid-template-columns:1fr}.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.svc-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
 
 #projects{background:var(--navy2)}
@@ -590,36 +593,42 @@ body,section,footer,#topnav{transition:background-color .35s,color .35s}
       <h3>Marine Steel Structures</h3>
       <p>Design, installation and maintenance of marine steel constructions and marine pier equipment.</p>
       <a class="svc-link" href="#quote" data-svc="0">Request a quote →</a>
+      <div class="svc-img" data-svcimg="0" role="button" tabindex="0"><img src="svc-1.jpg" alt="Marine Steel Structures" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
     <div class="holo-card reveal" data-delay="2">
       <div class="ic">⚓</div>
       <h3>Harbors &amp; Yacht Marinas</h3>
       <p>Marine construction and infrastructure for harbors and marinas, plus modular pontoons and upgrading of floating units.</p>
       <a class="svc-link" href="#quote" data-svc="1">Request a quote →</a>
+      <div class="svc-img" data-svcimg="1" role="button" tabindex="0"><img src="svc-2.jpg" alt="Harbors &amp; Yacht Marinas" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
     <div class="holo-card reveal" data-delay="3">
       <div class="ic">⚡</div>
       <h3>Power &amp; Air Conditioning</h3>
       <p>Supply, installation and maintenance of solar and diesel power stations and central air conditioning stations.</p>
       <a class="svc-link" href="#quote" data-svc="2">Request a quote →</a>
+      <div class="svc-img" data-svcimg="2" role="button" tabindex="0"><img src="svc-3.jpg" alt="Power &amp; Air Conditioning" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
     <div class="holo-card reveal" data-delay="4">
       <div class="ic">🔥</div>
       <h3>Firefighting &amp; Pump Stations</h3>
       <p>Design, supply and assembly of firefighting systems and pump stations — NFPA member (No. 3155563).</p>
       <a class="svc-link" href="#quote" data-svc="3">Request a quote →</a>
+      <div class="svc-img" data-svcimg="3" role="button" tabindex="0"><img src="svc-4.jpg" alt="Firefighting &amp; Pump Stations" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
     <div class="holo-card reveal" data-delay="5">
       <div class="ic">💧</div>
       <h3>Pumps, Compressors &amp; Networks</h3>
       <p>Compressors and pumps, water and sanitation networks, and fuel (gasoline and diesel) networks.</p>
       <a class="svc-link" href="#quote" data-svc="4">Request a quote →</a>
+      <div class="svc-img" data-svcimg="4" role="button" tabindex="0"><img src="svc-5.jpg" alt="Pumps, Compressors &amp; Networks" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
     <div class="holo-card reveal" data-delay="6">
       <div class="ic">🔩</div>
       <h3>Piling &amp; Hydraulic Equipment</h3>
       <p>Pile driving equipment, hydraulic tension and pile load test equipment, and industrial workshop equipment.</p>
       <a class="svc-link" href="#quote" data-svc="5">Request a quote →</a>
+      <div class="svc-img" data-svcimg="5" role="button" tabindex="0"><img src="svc-6.jpg" alt="Piling &amp; Hydraulic Equipment" loading="lazy" onerror="this.parentNode.style.display='none'"></div>
     </div>
   </div>
   </div>
@@ -876,6 +885,7 @@ document.querySelectorAll('.gal-item').forEach(item => {
 });
 
 let lbGroup = 0, lbIndex = 0;
+function grpN(){ return lbGroup === 'eq' ? EQ_N : lbGroup === 'svc' ? SVC_OK.length : PROJECTS[lbGroup].images.length; }
 const EQ_CAPS = [["Crawler crane", "ونش زحف"], ["Heavy crane & pontoons", "ونش ثقيل وبنتونات"], ["Survey & inspection instruments", "أجهزة المساحة والفحص"], ["450 mm lathe", "مخرطة 450 مم"], ["Welding & plasma cutting machines", "ماكينات لحام وقطع بلازما"], ["GPS, total stations & meters", "أجهزة GPS ومحطات شاملة وقياس"], ["Pillar & magnetic drills", "دريلات عمودية ومغناطيسية"], ["70-ton metal forming press", "مكبس تشكيل المعادن 70 طن"]];
 const EQ_FILES = ["eq-1.jpg", "eq-2.jpg", "eq-3.jpg", "eq-5.jpg", "eq-6.jpg", "eq-7.jpg", "eq-8.jpg", "eq-9.jpg"];
 const EQ_N = EQ_CAPS.length;
@@ -885,6 +895,12 @@ function openLightbox(g, i){
   document.getElementById('lightbox').classList.add('active');
 }
 function updateLightbox(){
+  if (lbGroup === 'svc') {
+    document.getElementById('lbImg').src = SVC_OK[lbIndex][0];
+    document.getElementById('lbCaption').textContent = SVC_OK[lbIndex][LANG === 'ar' ? 2 : 1] + ` (${lbIndex+1}/${SVC_OK.length})`;
+    document.getElementById('lbPrev').style.display = document.getElementById('lbNext').style.display = SVC_OK.length > 1 ? '' : 'none';
+    return;
+  }
   if (lbGroup === 'eq') {
     document.getElementById('lbImg').src = EQ_FILES[lbIndex];
     document.getElementById('lbCaption').textContent = EQ_CAPS[lbIndex][LANG === 'ar' ? 1 : 0] + ` (${lbIndex+1}/${EQ_N})`;
@@ -898,8 +914,8 @@ function updateLightbox(){
 }
 document.getElementById('lbClose').addEventListener('click', () => document.getElementById('lightbox').classList.remove('active'));
 document.getElementById('lightbox').addEventListener('click', (e) => { if(e.target.id === 'lightbox') document.getElementById('lightbox').classList.remove('active'); });
-document.getElementById('lbPrev').addEventListener('click', () => { const n = lbGroup === 'eq' ? EQ_N : PROJECTS[lbGroup].images.length; lbIndex = (lbIndex - 1 + n) % n; updateLightbox(); });
-document.getElementById('lbNext').addEventListener('click', () => { const n = lbGroup === 'eq' ? EQ_N : PROJECTS[lbGroup].images.length; lbIndex = (lbIndex + 1) % n; updateLightbox(); });
+document.getElementById('lbPrev').addEventListener('click', () => { const n = grpN(); lbIndex = (lbIndex - 1 + n) % n; updateLightbox(); });
+document.getElementById('lbNext').addEventListener('click', () => { const n = grpN(); lbIndex = (lbIndex + 1) % n; updateLightbox(); });
 
 // Touch swipe support in the lightbox (swipe left/right for next/prev).
 (function(){
@@ -913,7 +929,7 @@ document.getElementById('lbNext').addEventListener('click', () => { const n = lb
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-      const cnt = lbGroup === 'eq' ? EQ_N : PROJECTS[lbGroup].images.length;
+      const cnt = grpN();
       if (dx < 0) lbIndex = (lbIndex + 1) % cnt;
       else lbIndex = (lbIndex - 1 + cnt) % cnt;
       updateLightbox();
@@ -953,6 +969,22 @@ navLinks.forEach(a => { const s = document.querySelector(a.getAttribute('href'))
 // Equipment photos open in the lightbox
 document.querySelectorAll('.eq-gal .gal-item').forEach(el => {
   const open = () => openLightbox('eq', +el.dataset.eq);
+  el.addEventListener('click', open);
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+});
+
+// Services photos (shown under each card's text). Click opens the lightbox.
+// Format: [file, English caption, Arabic caption]
+const SVC_OK = [
+  ["svc-1.jpg", "Marine Steel Structures", "هياكل بحرية فولاذية"],
+  ["svc-2.jpg", "Harbors & Yacht Marinas", "الموانئ ومراسي اليخوت"],
+  ["svc-3.jpg", "Power & Air Conditioning", "الطاقة والتكييف"],
+  ["svc-4.jpg", "Firefighting & Pump Stations", "مكافحة الحريق ومحطات الطلمبات"],
+  ["svc-5.jpg", "Pumps, Compressors & Networks", "الطلمبات والكباسات والشبكات"],
+  ["svc-6.jpg", "Piling & Hydraulic Equipment", "معدات الخوازيق والهيدروليك"]
+];
+document.querySelectorAll('.svc-img').forEach(el => {
+  const open = () => openLightbox('svc', +el.dataset.svcimg);
   el.addEventListener('click', open);
   el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
 });
